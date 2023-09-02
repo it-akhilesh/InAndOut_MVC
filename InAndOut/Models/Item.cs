@@ -8,5 +8,7 @@ namespace InAndOut.Models
         public int Id { get; set; }
         [Required]
         public string Borrower { get; set; }
+        public string Lender { get; set; }
+        public string ItemName { get; set; }
     }
 }
