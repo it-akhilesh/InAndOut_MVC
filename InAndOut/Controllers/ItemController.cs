@@ -18,7 +18,8 @@ namespace InAndOut.Controllers
         }
 
         public IActionResult Create()
-        {            
+        {
+            
             return View();
         }
     }
