@@ -22,7 +22,6 @@ namespace InAndOut.Data
                 new Item { Id = 5, Borrower = "Dhillon", ItemName = "Bike", Lender = "Hero" }
 
                 );
-        }
-         
+        }         
     }
 }

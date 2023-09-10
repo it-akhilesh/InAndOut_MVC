@@ -17,9 +17,19 @@ namespace InAndOut.Controllers
             return View(objItemlist);
         }
 
+        // Get-Create
         public IActionResult Create()
+        {            
+            return View();
+        }
+
+        // Post-Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Item obj)
         {
-            
+            _db.Items.Add(obj);
+            _db.SaveChanges();
             return View();
         }
     }
