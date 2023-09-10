@@ -30,7 +30,7 @@ namespace InAndOut.Controllers
         {
             _db.Items.Add(obj);
             _db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
