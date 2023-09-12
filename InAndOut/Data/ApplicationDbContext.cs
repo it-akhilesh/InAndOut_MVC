@@ -13,6 +13,7 @@ namespace InAndOut.Data
         public DbSet<Item> Items { get; set; }
         public DbSet <Expense> Expenses{ get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Item>().HasData(
