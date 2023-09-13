@@ -37,6 +37,39 @@ namespace InAndOut.Controllers
             }
             return View(obj);
         }
+        // get delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int? id)
+        {
+            
+            if (id == null || id==0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Expenses.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        // post Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Expenses.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Expenses.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+        }  
 
     }
 }
