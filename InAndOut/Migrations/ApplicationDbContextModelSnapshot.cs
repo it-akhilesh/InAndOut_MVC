@@ -36,7 +36,12 @@ namespace InAndOut.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ExpenseTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ExpenseTypeId");
 
                     b.ToTable("Expenses");
                 });
@@ -111,6 +116,17 @@ namespace InAndOut.Migrations
                             ItemName = "Bike",
                             Lender = "Hero"
                         });
+                });
+
+            modelBuilder.Entity("InAndOut.Models.Expense", b =>
+                {
+                    b.HasOne("InAndOut.Models.ExpenseType", "ExpenseType")
+                        .WithMany()
+                        .HasForeignKey("ExpenseTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ExpenseType");
                 });
 #pragma warning restore 612, 618
         }
