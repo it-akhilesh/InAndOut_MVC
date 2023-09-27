@@ -99,29 +99,38 @@ namespace InAndOut.Controllers
 
         public IActionResult Update(int? id)
         {
+            ExpenseVM expenseVm = new ExpenseVM()
+            {
+                Expense = new Expense(),
+                TypeDropDown = _db.ExpenseTypes.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                })
+            };
 
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var obj = _db.Expenses.Find(id);
-            if (obj == null)
+            expenseVm.Expense = _db.Expenses.Find(id);
+            if (expenseVm.Expense == null)
             {
                 return NotFound();
             }
-            return View(obj);
+            return View(expenseVm);
         }
 
 
         // POST-Update
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(Expense obj)
+        public IActionResult Update(ExpenseVM obj)
         {
             if (ModelState.IsValid)
             {
                 //obj.ExpenseTypeId = 1;
-                _db.Expenses.Update(obj);
+                _db.Expenses.Update(obj.Expense);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
 
